@@ -1,11 +1,8 @@
-import { z } from "zod";
-import { baseProcedure, createTRPCRouter } from "../trpc";
+import { createTRPCRouter } from "../trpc";
+import { glossaryRouter } from "@/server/routers/glossary";
+import { termRouter } from "@/server/routers/term";
 export const appRouter = createTRPCRouter({
-  hello: baseProcedure.query(() => {
-    return {
-      greeting: `hello world`,
-    };
-  }),
+  glossary: glossaryRouter,
+  term: termRouter,
 });
-// export type definition of API
 export type AppRouter = typeof appRouter;

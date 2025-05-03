@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className="min-h-dvh">
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -35,7 +35,7 @@ export const termRouter = createTRPCRouter({
         .where(eq(terms.glossaryId, input.glossaryId))
         .limit(input.pageSize)
         .offset((input.page - 1) * input.pageSize)
-        .orderBy(terms.term); // 정렬 기준 추가
+        .orderBy(terms.createdAt); // 정렬 기준 추가
       const [totalCount] = await db
         .select({ count: count() })
         .from(terms)

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableHeader,
@@ -17,9 +17,12 @@ interface TermTableProps {
 }
 
 export default function TermTable({ id }: TermTableProps) {
-  const { data: terms } = trpc.term.list.useQuery({ glossaryId: id });
-  const [page, setPage] = React.useState(1);
-  const pages = terms?.totalPages || 1;
+  const [page, setPage] = useState(1);
+  const { data: terms } = trpc.term.list.useQuery({
+    glossaryId: id,
+    page,
+    pageSize: 10,
+  });
 
   return (
     <Table
@@ -31,8 +34,8 @@ export default function TermTable({ id }: TermTableProps) {
             showControls
             showShadow
             color="secondary"
-            page={page}
-            total={pages}
+            page={terms?.currentPage || 1}
+            total={terms?.totalPages || 1}
             onChange={(page) => setPage(page)}
           />
         </div>
